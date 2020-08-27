@@ -1,0 +1,617 @@
+{
+  "intents": [
+    {
+      "intent": "Enablement",
+      "examples": [
+        {
+          "text": "Visual classification"
+        },
+        {
+          "text": "I'd like to make an appointment"
+        },
+        {
+          "text": "appointment please"
+        },
+        {
+          "text": "please schedule an appointment"
+        },
+        {
+          "text": "can I get on the schedule"
+        },
+        {
+          "text": "classify my image"
+        },
+        {
+          "text": "take me to the enablement skill"
+        },
+        {
+          "text": "enable me"
+        },
+        {
+          "text": "I want to speak to ebo"
+        },
+        {
+          "text": "Take me to EBO"
+        },
+        {
+          "text": "I need enablement"
+        },
+        {
+          "text": "classify my plant"
+        },
+        {
+          "text": "Schedule me"
+        }
+      ]
+    },
+    {
+      "intent": "General_Jokes",
+      "examples": [
+        {
+          "text": "Can you tell me a joke?"
+        },
+        {
+          "text": "Can you tell a joke?"
+        },
+        {
+          "text": "Are there jokes?"
+        },
+        {
+          "text": "Another joke"
+        },
+        {
+          "text": "Do you have a joke?"
+        },
+        {
+          "text": "What is your favorite joke?"
+        },
+        {
+          "text": "What do you do for fun?"
+        },
+        {
+          "text": "Tell me something funny"
+        },
+        {
+          "text": "Tell me a joke"
+        },
+        {
+          "text": "Surprise me with something hilarious"
+        },
+        {
+          "text": "One more joke"
+        },
+        {
+          "text": "I'm bored"
+        },
+        {
+          "text": "I want a joke"
+        },
+        {
+          "text": "I am getting bored"
+        },
+        {
+          "text": "Do you like humor?"
+        },
+        {
+          "text": "Do you like fun?"
+        },
+        {
+          "text": "Do you have humor?"
+        }
+      ],
+      "description": "Request a joke."
+    },
+    {
+      "intent": "Covid",
+      "examples": [
+        {
+          "text": "Tell me about Covid"
+        },
+        {
+          "text": "covid"
+        },
+        {
+          "text": "I have questions about the coronavirus"
+        },
+        {
+          "text": "is the coronavirus spreading"
+        },
+        {
+          "text": "covid 19"
+        },
+        {
+          "text": "what can you tell me about the pandemic"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    },
+    "from-sample": true
+  },
+  "webhooks": [
+    {
+      "url": "https://us-south.functions.cloud.ibm.com/api/v1/web/ccrane%40us.ibm.com_Dev/default/languageorchestration.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "$webhook_result_1.error"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1596472636788",
+      "conditions": "anything_else",
+      "dialog_node": "response_3_1596472636797",
+      "previous_sibling": "response_2_1596472636797"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "$webhook_result_1.message"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1596472636788",
+      "context": {
+        "session_id": "$webhook_result_1.session_id",
+        "set_context": "enablement"
+      },
+      "conditions": "$webhook_result_1.message",
+      "dialog_node": "response_2_1596472636797"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "$webhook_result_1.error"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1596474898049",
+      "conditions": "anything_else",
+      "dialog_node": "response_3_1596474898058",
+      "previous_sibling": "response_2_1596474898058"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "$webhook_result_1.message"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1596474898049",
+      "context": {
+        "session_id": "$webhook_result_1.session_id",
+        "set_context": "covid"
+      },
+      "conditions": "$webhook_result_1.message",
+      "dialog_node": "response_2_1596474898058"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "$webhook_result_1.error"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1596477872872",
+      "conditions": "anything_else",
+      "dialog_node": "response_9_1596477872886",
+      "previous_sibling": "response_8_1596477872886"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "$webhook_result_1.message"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1596477872872",
+      "context": {
+        "session_id": "$webhook_result_1.session_id",
+        "set_context": "covid"
+      },
+      "conditions": "$webhook_result_1.message",
+      "dialog_node": "response_8_1596477872886"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A gnat sits on a bull's horn for a long time. Eventually, he asks the bull whether he'd like him to leave. The bull says he even never knew the gnat was there in the first place and won't miss him when he's gone. It's a great lesson about exaggerating one's own importance."
+              },
+              {
+                "text": "A logician's wife is having a baby. The doctor immediately hands the newborn to the dad. The wife says, \"Is it a boy or a girl?\" The logician says, \"Yes.\""
+              },
+              {
+                "text": "Heard about that new band called 1023 MB? They haven't had any gigs yet."
+              },
+              {
+                "text": "C, Eb, and G walk into a bar. The bartender says, \"Sorry, no minors.\""
+              },
+              {
+                "text": "If you're not part of the solution, you're part of the precipitate."
+              },
+              {
+                "text": "A linguistics professor says during a lecture that, \"In English, a double negative forms a positive. But in some languages, such as Russian, a double negative is still a negative. However, in no language in the world can a double positive form a negative.\" But then a voice from the back of the room piped up, \"Yeah, right.\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "parent": "node_2_1593121572926",
+      "disabled": true,
+      "dialog_node": "response_7_1597349062471"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "$webhook_result_1.error"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1598472598325",
+      "conditions": "anything_else",
+      "dialog_node": "response_3_1598472598359",
+      "previous_sibling": "response_2_1598472598359"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "$webhook_result_1.message"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1598472598325",
+      "context": {
+        "session_id": "$webhook_result_1.session_id",
+        "set_context": "enablement"
+      },
+      "conditions": "$webhook_result_1.message",
+      "dialog_node": "response_2_1598472598359"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I did not understand. You can try a different phrase."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I do not understand what you want to say."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_1_1596472636788",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Jokes",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A gnat sits on a bull's horn for a long time. Eventually, he asks the bull whether he'd like him to leave. The bull says he even never knew the gnat was there in the first place and won't miss him when he's gone. It's a great lesson about exaggerating one's own importance."
+              },
+              {
+                "text": "A logician's wife is having a baby. The doctor immediately hands the newborn to the dad. The wife says, \"Is it a boy or a girl?\" The logician says, \"Yes.\""
+              },
+              {
+                "text": "Heard about that new band called 1023 MB? They haven't had any gigs yet."
+              },
+              {
+                "text": "C, Eb, and G walk into a bar. The bartender says, \"Sorry, no minors.\""
+              },
+              {
+                "text": "If you're not part of the solution, you're part of the precipitate."
+              },
+              {
+                "text": "A linguistics professor says during a lecture that, \"In English, a double negative forms a positive. But in some languages, such as Russian, a double negative is still a negative. However, in no language in the world can a double positive form a negative.\" But then a voice from the back of the room piped up, \"Yeah, right.\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "metadata": {
+        "_customization": {
+          "mcr": false
+        }
+      },
+      "conditions": "#General_Jokes",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_2_1593121572926",
+      "previous_sibling": "node_1_1592438706704"
+    },
+    {
+      "type": "standard",
+      "title": "Enablement (Set Context)",
+      "output": {},
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "lt_url": "0",
+            "wa_url": "https://gateway.watsonplatform.net/assistant/api/",
+            "language": "en",
+            "lt_apikey": "0",
+            "wa_apikey": "Y9hdrgwBweTrcTbqEDQ18aL_ftQglV2tDSqogGWej2j9",
+            "lt_version": "0",
+            "session_id": "0",
+            "wa_version": "2020-04-01",
+            "assistantId": "90bc7c04-6cd6-439b-b1ed-c849855d88f8",
+            "user_utterance": "<?input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Enablement &&       $set_context!=\"enablement\"",
+      "dialog_node": "node_1_1598472598325",
+      "previous_sibling": "node_1_1596474898049"
+    },
+    {
+      "type": "standard",
+      "title": "General Enablement / Scheduler Skill / Plant classification",
+      "output": {},
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "lt_url": "0",
+            "wa_url": "https://gateway.watsonplatform.net/assistant/api/",
+            "language": "en",
+            "lt_apikey": "0",
+            "wa_apikey": "Y9hdrgwBweTrcTbqEDQ18aL_ftQglV2tDSqogGWej2j9",
+            "lt_version": "$0",
+            "session_id": "$session_id",
+            "wa_version": "2020-04-01",
+            "assistantId": "90bc7c04-6cd6-439b-b1ed-c849855d88f8",
+            "user_utterance": "<?input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": " $set_context==\"enablement\"",
+      "dialog_node": "node_1_1596472636788",
+      "previous_sibling": "node_7_1596477872872"
+    },
+    {
+      "type": "standard",
+      "title": "Covid Skill (Set Context)",
+      "output": {},
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "lt_url": "0",
+            "wa_url": "https://api.us-east.assistant.watson.cloud.ibm.com",
+            "language": "en",
+            "lt_apikey": "0",
+            "wa_apikey": "75viwWsIyGMF7epo7r9TQXtSV_RTQSXo8O1eYvjbKsWE",
+            "lt_version": "0",
+            "session_id": "0",
+            "wa_version": "2020-04-01",
+            "assistantId": "3e3ebc0c-69ea-4d45-bc5f-d4fa9bbb6200",
+            "user_utterance": "<?input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Covid && $set_context!=\"covid\"",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_1_1596474898049",
+      "previous_sibling": "node_2_1593121572926"
+    },
+    {
+      "type": "standard",
+      "title": "Covid Skill",
+      "output": {},
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "lt_url": "0",
+            "wa_url": "https://api.us-east.assistant.watson.cloud.ibm.com",
+            "language": "en",
+            "lt_apikey": "0",
+            "wa_apikey": "75viwWsIyGMF7epo7r9TQXtSV_RTQSXo8O1eYvjbKsWE",
+            "lt_version": "0",
+            "session_id": "$session_id",
+            "wa_version": "2020-04-01",
+            "assistantId": "3e3ebc0c-69ea-4d45-bc5f-d4fa9bbb6200",
+            "user_utterance": "<?input.text?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": " $set_context==\"covid\"",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_7_1596477872872",
+      "previous_sibling": "node_1_1598472598325"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "source": "https://raw.githubusercontent.com/Christophercrane/Multiskill/master/images/multiskilldots.png",
+            "response_type": "image"
+          },
+          {
+            "title": "Multiskill connects to numerous Watson Assistant Skills. Below are target options. Choose one and you will be connected to that skill. At anytime you can digress away to another skill by simply typing \"I'd like to make an appointment\" or \"Tell me a Joke\". The bot maintains state for each skill while you are connected to it.",
+            "options": [
+              {
+                "label": "Multiskill: Tell  me a joke",
+                "value": {
+                  "input": {
+                    "text": "Tell me a joke"
+                  }
+                }
+              },
+              {
+                "label": "Covid Skill: Can my pet get covid?",
+                "value": {
+                  "input": {
+                    "text": "can my pet get the coronavirus?"
+                  }
+                }
+              },
+              {
+                "label": "Enablement Skill: Schedule a meeting",
+                "value": {
+                  "input": {
+                    "text": "I would like to schedule a meeting"
+                  }
+                }
+              },
+              {
+                "label": "Enablement Skill: Visual Classification example",
+                "value": {
+                  "input": {
+                    "text": "Classify my plant"
+                  }
+                }
+              }
+            ],
+            "description": "",
+            "response_type": "option"
+          }
+        ]
+      },
+      "context": {
+        "session_id": 0,
+        "set_context": 0
+      },
+      "conditions": "welcome",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_1_1592438706704"
+    }
+  ],
+  "counterexamples": [
+    {
+      "text": "how can I get tested"
+    }
+  ],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": false,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": false
+  },
+  "learning_opt_out": false,
+  "name": "Multiskill",
+  "language": "en",
+  "description": "Multiskill enables a single skill to target other skills. Leverage this bot as a router skill pointing to various target skills."
+}
